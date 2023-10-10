@@ -26,7 +26,7 @@ public class Benchmark : IDisposable, IAsyncDisposable
         var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION") ?? string.Empty;
 
         var serviceProvider = new ServiceCollection()
-            .AddSmartSorter(Assembly.GetExecutingAssembly())
+            .AddSmartSorter(options => options.AddAssembly(Assembly.GetExecutingAssembly()))
             .BuildServiceProvider();
 
         _testContext = new BenchmarkContext(connectionString);
