@@ -53,11 +53,12 @@ public static class ServiceCollectionExtensions
 
         foreach (var sourceType in options.SourceTypes)
         {
+            var configurationRules = new Dictionary<string, RuleConfiguration>();
             foreach (var propertyInfo in sourceType.GetProperties())
             {
                 var propertyType = propertyInfo.PropertyType;
 
-                if (propertyType.IsClass is false || propertyType == typeof(string))
+                if (propertyType.IsClass && propertyType != typeof(string))
                 {
                     continue;
                 }
@@ -70,11 +71,10 @@ public static class ServiceCollectionExtensions
                     property,
                     parameter);
 
-                configurations.Add(sourceType, new EntitySortingConfiguration(new Dictionary<string, RuleConfiguration>
-                {
-                    [propertyInfo.Name] = new(lambda, propertyType)
-                }));
+                configurationRules.Add(propertyInfo.Name, new RuleConfiguration(lambda, propertyType));
             }
+
+            configurations.Add(sourceType, new EntitySortingConfiguration(configurationRules));
         }
 
         serviceCollection.AddSingleton<IConfigurationProvider>(new ConfigurationProvider(configurations));
