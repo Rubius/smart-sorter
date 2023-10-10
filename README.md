@@ -31,12 +31,12 @@ public class EntitySortingConfiguration : ISortingConfiguration<Entity>
 }
 ```
 
-* Call the extension method `AddSmartSorter(this IServiceCollection serviceCollection, Assembly assembly)`
+* Call the extension method `AddSmartSorter(this IServiceCollection serviceCollection, Action<SortingConfigurationOptions> optionsBuilder)`
  and pass the assembly for scanning configurations
 
 ```csharp
 var serviceProvider = new ServiceCollection()
-    .AddSmartSorter(Assembly.GetExecutingAssembly())
+    .AddSmartSorter(options => options.AddAssembly(Assembly.GetExecutingAssembly()))
     .BuildServiceProvider();
 ```
 
