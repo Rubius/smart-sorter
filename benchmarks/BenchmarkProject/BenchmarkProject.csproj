@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BenchmarkDotNet" Version="0.13.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\SmartSorter.DependencyInjection\SmartSorter.DependencyInjection.csproj" />
+      <ProjectReference Include="..\..\src\SmartSorter.QueryableExtensions\SmartSorter.QueryableExtensions.csproj" />
+      <ProjectReference Include="..\..\src\SmartSorter\SmartSorter.csproj" />
+    </ItemGroup>
+
+</Project>
